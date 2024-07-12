@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakery Login</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container styles */
+        .container {
+            background-color: #fff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Header styles */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #8c5e58;
+        }
+
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        /* Button styles */
+        .login-button {
+            background-color: #8c5e58;
+            color: white;
+            border: none;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .login-button:hover {
+            background-color: #5a3e36;
+        }
+
+        /* Link styles */
+        .form-group a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .form-group a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Login</h1>
+    </div>
+    <form id="loginForm" class="login-form" action="/login" method="POST">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="login-button">Login</button>
+    </form>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="register.html">Not registered yet? Register here.</a>
+    </div>
+</div>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message === 'Login successful') {
+          // Store user data in localStorage
+          localStorage.setItem('user', JSON.stringify(data.user));
+          localStorage.setItem('userId', data.user._id); // Store user ID separately
+          alert('Login successful, redirecting to profile.');
+          window.location.href = 'profile.html';
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error during login:', error);
+        alert('Login failed. Please try again.');
+      });
+  });
+</script>
+
+</body>
+</html>

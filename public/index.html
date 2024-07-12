@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bakery</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FFFFFF;
+            color: #5a3e36;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            flex-direction: column; /* Changed to column for stacking */
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #8c5e58;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/bakery_pattern.png'); /* Add a suitable pattern image */
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+            color: #fff;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+.header .buttons {
+    display: flex;
+    gap: 5px; /* Adjusted gap to reduce distance */
+    z-index: 6;
+}
+
+.header button {
+    background-color: #a67c52;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    z-index: 2;
+}
+
+.header button:hover {
+    background-color: #8c5e58;
+}
+
+        /* Right section styles */
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column; /* Changed to column for stacking */
+            gap: 20px;
+            z-index: 2;
+        }
+
+        .info-box {
+            background-color: #f8f1e4;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-box:nth-child(1) {
+            order: 1; /* Place About Us box on top */
+        }
+
+
+        .info-box:hover {
+            transform: translateY(-10px);
+        }
+
+        .info-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/pie_front.jpg'); /* Add a suitable pattern image */
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .info-box h2 {
+            color: #5a3e36;
+            font-size: 24px;
+            margin-bottom: 10px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .info-box p {
+            color: #5a3e36;
+            font-size: 16px;
+            line-height: 1.6;
+            z-index: 2;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+
+
+        /* Add animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .header h1 {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .header button {
+            animation: float 4s ease-in-out infinite 0.2s;
+        }
+
+        /* Falling cookies animation */
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .cookie {
+            position: absolute;
+            top: 0;
+            width: 100px; /* Increased size */
+            height: 100px; /* Increased size */
+            background-image: url('images/cookie.jpg'); /* Add the cookie image */
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: fall 10s linear infinite;
+        }
+
+        .cookie:nth-child(2) {
+            animation-duration: 13s;
+            animation-delay: 1s;
+        }
+
+        .cookie:nth-child(3) {
+            animation-duration: 14s;
+            animation-delay: 1s;
+        }
+
+        .cookie:nth-child(4) {
+            animation-duration: 7s;
+            animation-delay: 1s;
+        }
+
+        .cookie:nth-child(5) {
+            animation-duration: 11s;
+            animation-delay: 1s;
+        }
+
+        .cookie:nth-child(6) {
+            animation-duration: 9s;
+            animation-delay: 1s;
+        }
+
+        .cookie:nth-child(7) {
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+        .cookie:nth-child(8) {
+            animation-duration: 7s;
+            animation-delay: 1s;
+        }
+         /* Contact Us button styles */
+        .contact-us {
+            display: flex;
+            justify-content: center; /* Center the button */
+            margin: 20px 0;
+        }
+
+        .contact-us button {
+            background-color: #8c5e58; /* Brown color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            z-index: 2;
+        }
+
+        .contact-us button:hover {
+            background-color: #5a3e36; /* Darker brown on hover */
+        }
+
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #8c5e58;
+            color: white;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+    </style>
+</head>
+<body>
+<br>
+
+<div class="header">
+    <h1>My Bakery</h1>
+    <div class="buttons">
+        <form action="login.html">
+            <button type="submit">LOGIN</button>
+        </form>
+    </div>
+
+</div>
+<div class="container">
+    <div class="right-section">
+        <div class="info-box">
+            <h2>About Us</h2>
+            <p>Welcome to Our Bakery, nestled in the heart of Bangalore. Since 1999, we have been dedicated to crafting the finest pastries and breads, each baked with a commitment to quality and taste. Our journey began with a passion for baking, inspired by family recipes and a love for creating delicious treats.</p>
+            <p>At Our Bakery, we take pride in using only the freshest ingredients sourced locally whenever possible. From our crispy, golden croissants to our decadent cakes and hearty artisan breads, every item reflects our dedication to artisanal craftsmanship. Each morning, our talented bakers start early, ensuring that our shelves are filled with freshly baked delights for you to enjoy.</p>
+            <p>More than just a bakery, we strive to create a welcoming environment where our customers feel like part of our family. Whether you're picking up a morning pastry or planning a special occasion, we're here to make every visit memorable. Join us at Our Bakery and experience the taste of tradition and the warmth of our community.</p>
+        </div>
+
+    </div>
+</div>
+<div class="cookie"></div>
+<div class="cookie"></div>
+<div class="cookie"></div>
+<div class="cookie"></div>
+<div class="cookie"></div>
+<div class="cookie"></div>
+<div class="cookie"></div>
+<div class="cookie"></div>
+<<!-- Contact Us button -->
+<div class="contact-us">
+    <button type="button" onclick="window.location.href='contact.html'">CONTACT US</button>
+</div>
+
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 My Bakery. All rights reserved.</p>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const aboutParagraphs = document.querySelectorAll('.info-box:first-of-type p');
+        aboutParagraphs.forEach((paragraph, index) => {
+            setTimeout(() => {
+                paragraph.style.opacity = 1;
+                paragraph.style.transform = 'translateY(0)';
+            }, index * 1000);
+        });
+
+        const cookies = document.querySelectorAll('.cookie');
+        cookies.forEach((cookie, index) => {
+            cookie.style.left = `${Math.random() * window.innerWidth}px`;
+            console.log('Cookie position set:', cookie.style.left);
+        });
+    });
+</script>
+</body>
+</html>

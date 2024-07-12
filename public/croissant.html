@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #8c5e58;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .header .buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header button {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .header button:hover {
+            background-color: #5a3e36;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+
+        }
+
+
+        /* Item box styles */
+        .item-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(33.333% - 20px); /* Adjust width for three items per row */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        .item-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .item-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .item-box h2 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .item-box p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .item-box .price {
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #5a3e36;
+        }
+
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #8c5e58;
+            color: white;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+    <h1>My Bakery</h1>
+    <div class="buttons">
+        <form action="index.html">
+            <button type="submit">Home</button>
+        </form>
+
+        <form action="viewcart.html">
+            <button type="submit">View Cart</button>
+        </form>
+    </div>
+</div>
+
+<!-- Main content container -->
+<div class="container">
+    <!-- Danish Pastries -->
+    <div class="item-box">
+        <img src="images/DanishPastries.jpg" alt="Fruit Danish">
+        <h2>Fruit Danish</h2>
+        <p>Sweet and fruity Danish pastry</p>
+        <span class="price">$3.49</span>
+        <button class="add-to-cart" onclick="addToCart('Fruit Danish', 3.49)">Add to Cart</button>
+    </div>
+
+    <!-- Cinnamon Rolls -->
+    <div class="item-box">
+        <img src="images/CinnamonRolls.jpg" alt="Cinnamon Rolls">
+        <h2>Cinnamon Rolls</h2>
+        <p>Sweet and aromatic cinnamon rolls</p>
+        <span class="price">$2.99</span>
+        <button class="add-to-cart" onclick="addToCart('Cinnamon Rolls', 2.99)">Add to Cart</button>
+    </div>
+
+    <!-- Puff Pastries -->
+    <div class="item-box">
+        <img src="images/PuffPastries.jpg" alt="Napoleon">
+        <h2>Napoleon</h2>
+        <p>Layered puff pastry with cream filling</p>
+        <span class="price">$4.49</span>
+        <button class="add-to-cart" onclick="addToCart('Napoleon', 4.49)">Add to Cart</button>
+    </div>
+
+    <!-- Turnovers -->
+
+    <div class="item-box">
+        <img src="images/Turnovers.jpg" alt="Cherry Turnover">
+        <h2>Cherry Turnover</h2>
+        <p>Buttery pastry with cherry filling</p>
+        <span class="price">$3.49</span>
+        <button class="add-to-cart" onclick="addToCart('Cherry Turnover', 3.49)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 My Bakery. All rights reserved.</p>
+</footer>
+
+<!-- JavaScript for cart functionality -->
+<script>
+    // Function to add item to cart
+    function addToCart(itemName, itemPrice) {
+        // Retrieve existing cart items from localStorage or initialize empty array
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Add new item to cart
+        cart.push({ name: itemName, price: itemPrice });
+
+        // Store updated cart in localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // Show popup message
+        alert(`${itemName} added to cart!`);
+    }
+</script>
+</body>
+</html>

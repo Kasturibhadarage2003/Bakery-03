@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f3e9;
+            padding: 20px;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        /* Header styles */
+       .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #8c5e58;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .header .buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header button {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .header button:hover {
+            background-color: #5a3e36;
+        }
+        /* Right section styles */
+        .right-section {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Item box styles */
+        .item-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .item-box:hover {
+            transform: scale(1.05);
+        }
+
+        .item-box h2 {
+            color: #8b4513;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .item-box p {
+            color: #4b3621;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .item-box img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .item-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #8c5e58;
+            color: white;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<br>
+
+<!-- Header -->
+<div class="header">
+    <h1>My Bakery</h1>
+    <div class="buttons">
+        <form action="index.html">
+            <button type="submit">Home</button>
+        </form>
+
+        <form action="ViewCart.html">
+            <button type="submit">View Cart</button>
+        </form>
+    </div>
+</div>
+
+<!-- Main content container -->
+<div class="container">
+    <div class="right-section">
+        <!-- Example item boxes (replace with your actual items) -->
+        <a href="bread.html" class="item-link">
+            <div class="item-box">
+                <img src="images/bread_front.jpg" alt="Bread">
+                <h2>Bread</h2>
+                <p>Discover our delicious selection of freshly baked bread.</p>
+            </div>
+        </a>
+        <a href="croissant.html" class="item-link">
+            <div class="item-box">
+                <img src="images/crossiont_front.jpg" alt="Croissants">
+                <h2>Croissants</h2>
+                <p>Indulge in our flaky, buttery croissants.</p>
+            </div>
+        </a>
+        <a href="cake.html" class="item-link">
+            <div class="item-box">
+                <img src="images/cake_front.jpg" alt="Cakes">
+                <h2>Cakes</h2>
+                <p>Celebrate any occasion with our delightful cakes.</p>
+            </div>
+        </a>
+        <a href="cookies.html" class="item-link">
+            <div class="item-box">
+                <img src="images/cookies_front.jpg" alt="Cookies">
+                <h2>Cookies</h2>
+                <p>Enjoy our assortment of homemade cookies.</p>
+            </div>
+        </a>
+        <a href="pies.html" class="item-link">
+            <div class="item-box">
+                <img src="images/pie_front.jpg" alt="Pies and Tarts">
+                <h2>Pies and Tarts</h2>
+                <p>Try our delicious pies and tarts made with the finest ingredients.</p>
+            </div>
+        </a>
+        <a href="specialty.html" class="item-link">
+            <div class="item-box">
+                <img src="images/Specialty_front.jpg" alt="Specialty Items">
+                <h2>Specialty Items</h2>
+                <p>Explore our special treats that are perfect for any time.</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- Footer (optional, adjust as needed) -->
+<footer>
+    <p>&copy; 2024 My Bakery. All rights reserved.</p>
+</footer>
+</body>
+</html>

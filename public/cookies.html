@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #8c5e58;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .header .buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header button {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .header button:hover {
+            background-color: #5a3e36;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+
+        }
+
+        /* Item box styles */
+        .item-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(33.333% - 20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        .item-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .item-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .item-box h2 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .item-box p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .item-box .price {
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #5a3e36;
+        }
+
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #8c5e58;
+            color: white;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+    <h1>My Bakery</h1>
+    <div class="buttons">
+        <form action="index.html">
+            <button type="submit">Home</button>
+        </form>
+
+        <form action="ViewCart.html">
+            <button type="submit">View Cart</button>
+        </form>
+    </div>
+</div>
+
+<!-- Main content container -->
+<div class="container">
+    <div class="item-box">
+        <img src="images/ChocolateChipCookies.jpg" alt="Chocolate Chip Cookies">
+        <h2>Chocolate Chip </h2>
+        <p>Classic chocolate chip cookies</p>
+        <span class="price">$4.99</span>
+        <button class="add-to-cart" onclick="addToCart('Chocolate Chip Cookies', 4.99)">Add to Cart</button>
+    </div>
+    <div class="item-box">
+        <img src="images/OatmealCookies.jpg" alt="Oatmeal Cookies">
+        <h2>Oatmeal </h2>
+        <p>Healthy oatmeal cookies</p>
+        <span class="price">$3.99</span>
+        <button class="add-to-cart" onclick="addToCart('Oatmeal Cookies', 3.99)">Add to Cart</button>
+    </div>
+    <div class="item-box">
+        <img src="images/PeanutButterCookies.jpg" alt="Peanut Butter Cookies">
+        <h2>Peanut Butter </h2>
+        <p>Delicious peanut butter cookies</p>
+        <span class="price">$4.49</span>
+        <button class="add-to-cart" onclick="addToCart('Peanut Butter Cookies', 4.49)">Add to Cart</button>
+    </div>
+    <div class="item-box">
+        <img src="images/ShortbreadCookies.jpg" alt="Shortbread Cookies">
+        <h2>Shortbread </h2>
+        <p>Buttery and crumbly shortbread cookies</p>
+        <span class="price">$3.49</span>
+        <button class="add-to-cart" onclick="addToCart('Shortbread Cookies', 3.49)">Add to Cart</button>
+    </div>
+    <div class="item-box">
+        <img src="images/Macarons.jpg" alt="Macarons">
+        <h2>Macarons</h2>
+        <p>Colorful and delicate macarons</p>
+        <span class="price">$5.99</span>
+        <button class="add-to-cart" onclick="addToCart('Macarons', 5.99)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 My Bakery. All rights reserved.</p>
+</footer>
+
+<!-- JavaScript for cart functionality -->
+<script>
+    // Function to add item to cart
+    function addToCart(itemName, itemPrice) {
+        // Retrieve existing cart items from localStorage or initialize empty array
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Add new item to cart
+        cart.push({ name: itemName, price: itemPrice });
+
+        // Store updated cart in localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // Show popup message
+        alert(`${itemName} added to cart!`);
+    }
+</script>
+</body>
+</html>

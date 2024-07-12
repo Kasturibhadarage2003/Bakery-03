@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+/* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #8c5e58;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .header .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header button {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .header button:hover {
+            background-color: #8c5e58;
+        }
+
+        .profile-container {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-container h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .profile-container p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .address-form {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .address-form h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .address-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .address-form input[type="text"],
+        .address-form input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .address-form button {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .address-form button:hover {
+            background-color: #5a3e36;
+        }
+ /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #8c5e58;
+            color: white;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<br>
+
+<div class="header">
+    <h1>My Bakery</h1>
+    <div class="buttons">
+        <form action="profile.html">
+            <button type="submit">Back</button>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="profile-container">
+        <h2>User Profile</h2>
+        <p><strong>Name:</strong> <span id="userName"></span></p>
+        <p><strong>Email:</strong> <span id="userEmail"></span></p>
+        <p><strong>Phone Number:</strong> <span id="userPhone"></span></p>
+    </div>
+    <div class="address-form" id="addressForm">
+        <h2>Add Address</h2>
+        <form id="addressForm">
+            <label for="street">Street:</label>
+            <input type="text" id="street" name="street" required>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required>
+            <label for="zip">ZIP Code:</label>
+            <input type="text" id="zip" name="zip" required>
+            <button type="button" onclick="saveAddress()">Save Address</button>
+        </form>
+    </div>
+</div>
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 My Bakery. All rights reserved.</p>
+</footer>
+<script>
+<script>
+    // Retrieve user data from localStorage
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    // Display user details if available
+    if (user) {
+        document.getElementById('userName').textContent = user.name;
+        document.getElementById('userEmail').textContent = user.email;
+        document.getElementById('userPhone').textContent = user.phone;
+    } else {
+        alert('No user data found. Please log in.');
+        window.location.href = 'login.html'; // Redirect to login page if no user data found
+    }
+
+    // Function to save address
+    function saveAddress() {
+        const userId = user ? user._id : null;  // Ensure this line correctly retrieves user._id
+        if (!userId) {
+            alert('User ID not found. Please log in again.');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        const street = document.getElementById('street').value;
+        const city = document.getElementById('city').value;
+        const state = document.getElementById('state').value;
+        const zip = document.getElementById('zip').value;
+
+        fetch('/save-address', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userId, street, city, state, zip })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+            } else {
+                alert('Address saved successfully');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Cart</title>
+    <style>
+        /* Reset default styles */
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+         }
+
+         /* Body styles */
+         body {
+             font-family: Arial, sans-serif;
+             background-color: #f0f0f0;
+             padding: 20px;
+         }
+
+
+         /* Header styles */
+         .header {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             background-color: #8c5e58;
+             padding: 15px 30px;
+             border-radius: 8px;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+             margin-bottom: 30px;
+         }
+
+         .header h1 {
+             margin: 0;
+             font-size: 24px;
+             color: #fff;
+             text-transform: uppercase;
+         }
+
+         .header .buttons {
+             display: flex;
+             gap: 15px;
+         }
+
+         .header button {
+             background-color: #a67c52;
+             color: white;
+             border: none;
+             padding: 10px 20px;
+             text-align: center;
+             text-decoration: none;
+             font-size: 16px;
+             cursor: pointer;
+             border-radius: 4px;
+             transition: background-color 0.3s;
+         }
+
+         .header button:hover {
+             background-color: #5a3e36;
+         }
+
+
+         /* Cart items container */
+         .cart-items {
+             background-color: #fff;
+             padding: 20px;
+             border-radius: 8px;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         }
+
+         .cart-item {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             border-bottom: 1px solid #ddd;
+             padding: 10px 0;
+         }
+
+         .cart-item:last-child {
+             border-bottom: none;
+         }
+
+         .cart-item .item-name {
+             flex: 1;
+         }
+
+         .cart-item .item-price {
+             margin-left: 20px;
+             font-weight: bold;
+         }
+
+         .total {
+             margin-top: 10px;
+             text-align: right;
+             font-size: 18px;
+         }
+
+         /* Additional charge option */
+         .additional-charge {
+             margin-top: 20px;
+             display: flex;
+             align-items: center;
+         }
+
+         .additional-charge label {
+             margin-right: 10px;
+         }
+
+         .additional-charge input {
+             margin-right: 10px;
+         }
+
+         /* Button styles */
+         .button-container {
+             margin-top: 20px;
+             text-align: center;
+         }
+
+         .show-total-button,
+         .pay-button,
+         .clear-cart-button {
+             background-color: #4CAF50;
+             color: white;
+             border: none;
+             padding: 10px 20px;
+             text-align: center;
+             text-decoration: none;
+             font-size: 16px;
+             cursor: pointer;
+             border-radius: 4px;
+             margin-right: 10px;
+         }
+
+         .show-total-button:hover,
+         .pay-button:hover,
+         .clear-cart-button:hover {
+             background-color: #45a049;
+         }
+         /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #8c5e58;
+            color: white;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<br>
+
+<!-- Header -->
+<div class="header">
+    <h1>Cart</h1>
+    <div class="buttons">
+        <form action="index.html">
+            <button type="submit">Home</button>
+        </form>
+
+        <form action="bread.html">
+            <button type="submit">Back to Items</button>
+        </form>
+    </div>
+</div>
+
+<!-- Main content container -->
+<div class="container">
+    <div class="cart-items" id="cart-items">
+        <!-- Cart items will be dynamically added here -->
+    </div>
+
+    <!-- Total price -->
+    <div class="total" id="cart-total" style="display: none;">Total: $0.00</div>
+
+    <!-- Additional charge for packing like a hamper -->
+    <div class="additional-charge">
+        <label for="packing">Pack like a hamper (+$5.00):</label>
+        <input type="checkbox" id="packing" onchange="updateTotal()">
+    </div>
+
+    <!-- Button container -->
+    <div class="button-container">
+        <button class="show-total-button" onclick="showTotal()">Show Total</button>
+        <button class="pay-button" onclick="redirectToPayment()">Proceed to Pay</button>
+        <button class="clear-cart-button" onclick="clearCart()">Clear Cart</button>
+    </div>
+</div>
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 My Bakery. All rights reserved.</p>
+</footer>
+<!-- JavaScript for cart functionality -->
+<script>
+    // Function to retrieve cart items from localStorage and display in cart
+    function displayCartItems() {
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalElement = document.getElementById('cart-total');
+
+        // Retrieve cart items from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Clear previous items in the cart
+        cartItemsContainer.innerHTML = '';
+
+        // Calculate total price
+        let total = 0;
+        cart.forEach(item => {
+            total += item.price;
+            const itemElement = document.createElement('div');
+            itemElement.classList.add('cart-item');
+            itemElement.innerHTML = `
+                <div class="item-name">${item.name}</div>
+                <div class="item-price">$${item.price.toFixed(2)}</div>
+            `;
+            cartItemsContainer.appendChild(itemElement);
+        });
+
+        // Update total price display
+        cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    // Function to update total when additional charge is applied
+    function updateTotal() {
+        const packingCheckbox = document.getElementById('packing');
+        const cartTotalElement = document.getElementById('cart-total');
+
+        // Retrieve cart items from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Calculate total price
+        let total = 0;
+        cart.forEach(item => {
+            total += item.price;
+        });
+
+        // Add packing charge if checkbox is checked
+        if (packingCheckbox.checked) {
+            total += 5.00;
+        }
+
+        // Update total price display
+        cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    // Function to show total price when button is clicked
+    function showTotal() {
+        const cartTotalElement = document.getElementById('cart-total');
+        cartTotalElement.style.display = 'block';
+        updateTotal(); // Update the total when showing it
+    }
+
+    function redirectToPayment() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const packingCheckbox = document.getElementById('packing');
+        let additionalCharge = packingCheckbox.checked ? 5.00 : 0;
+        let total = 0;
+        cart.forEach(item => {
+            total += item.price;
+        });
+        total += additionalCharge;
+
+        // Retrieve the user ID from local storage
+        const userId = localStorage.getItem('userId');
+
+        if (!userId) {
+            alert("User ID not found. Please log in again.");
+            return;
+        }
+
+        const orderDetails = {
+            userId: userId,
+            items: cart,
+            additionalCharge: additionalCharge,
+            total: total
+        };
+
+        fetch('/order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderDetails)
+        }).then(response => {
+            if (response.ok) {
+                localStorage.removeItem('cart'); // Clear the cart after successful payment
+                window.location.href = 'payment.html'; // Redirect to thank you page
+            } else {
+                console.error('Failed to place order');
+                // Handle failure to place order, display error message, etc.
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+            // Handle network errors, display error message to user, etc.
+        });
+    }
+
+    // Function to clear cart items
+    function clearCart() {
+        localStorage.removeItem('cart');
+        displayCartItems();
+        updateTotal();
+    }
+
+    // Display cart items on page load
+    displayCartItems();
+</script>
+</body>
+</html>

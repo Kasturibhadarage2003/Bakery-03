@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 1200px;
+             width: 100%;
+
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 2px;
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #8c5e58;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .header .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header button {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .header button:hover {
+            background-color: #5a3e36;
+        }
+
+         /* Right section styles */
+        .right-section {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+        }
+
+        .info-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+        .info-box h2 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+         /* Image styles */
+        .info-box img {
+            max-width: 65%; /* Adjust the maximum width as needed */
+            height: 75%;
+            display: block;
+            margin-top: 20px; /* Optional margin for spacing */
+        }
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #8c5e58;
+            color: white;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<br>
+
+<div class="header">
+    <h1>My Bakery</h1>
+    <div class="buttons">
+        <form action="hellouser.html">
+            <button type="submit" id="userButton">User</button>
+        </form>
+        <form action="items.html">
+            <button type="submit">Items</button>
+        </form>
+        <form action="login.html">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="right-section">
+        <div class="info-box">
+            <h2>About Us</h2>
+            <p>Welcome to Our Bakery, nestled in the heart of [Your City]. Since [Year Established], we have been dedicated to crafting the finest pastries and breads, each baked with a commitment to quality and taste. Our journey began with a passion for baking, inspired by family recipes and a love for creating delicious treats.</p>
+            <p>At Our Bakery, we take pride in using only the freshest ingredients sourced locally whenever possible. From our crispy, golden croissants to our decadent cakes and hearty artisan breads, every item reflects our dedication to artisanal craftsmanship. Each morning, our talented bakers start early, ensuring that our shelves are filled with freshly baked delights for you to enjoy.</p>
+            <p>More than just a bakery, we strive to create a welcoming environment where our customers feel like part of our family. Whether you're picking up a morning pastry or planning a special occasion, we're here to make every visit memorable. Join us at Our Bakery and experience the taste of tradition and the warmth of our community.</p>
+        </div>
+        <div class="info-box">
+            <h2>Contact Us</h2>
+            <p>123 Bakery Street, City, Country<br>
+                Phone: +123 456 789<br>
+                Email: info@mybakery.com</p>
+            <img src="images/bakery.jpg" alt="Contact Us Image">
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 My Bakery. All rights reserved.</p>
+</footer>
+<script>
+    // Function to logout user and clear localStorage
+    function logout() {
+        localStorage.removeItem('user');
+        window.location.href = 'login.html'; // Redirect to login page after logout
+    }
+
+     // Retrieve user data from localStorage
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    // Display user details if available
+    if (user) {
+        document.getElementById('userButton').textContent = `Hello! ${user.name}`; // Display user's name on the button
+    } else {
+        alert('No user data found. Please log in.');
+        window.location.href = 'login.html'; // Redirect to login page if no user data found
+    }
+</script>
+</body>
+</html>
